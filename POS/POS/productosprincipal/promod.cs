@@ -219,7 +219,7 @@ namespace POS.productosprincipal
                     {
                         mysql.conexion();
                         mysql.cadenasql = "update items set Descripcion='"+ descripcion.Text.Trim()+ "'" +
-                            ",Impuesto='"+ impuesto.Text.Trim() + "',OnHand='"+textBox1.Text+"'" +
+                            ",Impuesto='"+ impuesto.Text.Trim() + "',OnHand='"+(Int64.Parse(textBox1.Text)+numericUpDown1.Value) +"'" +
                             ",Precio='"+textBox2.Text+"',Costo='"+textBox3.Text+"'," +
                             "Marca='"+textBox4.Text+"',Talla='"+textBox5.Text+"',Familia='"+textBox6.Text+"',Estilo='"+textBox7.Text+"'," +
                             "Genero='"+textBox8.Text+"' where Barcode='" + dataGridView1.CurrentRow.Cells[0].Value.ToString() + "'";
@@ -232,6 +232,10 @@ namespace POS.productosprincipal
                         limpiar();
                     }
 
+                }
+                else
+                {
+                    MessageBox.Show("Faltan datos","Faltan datos",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
                 }
 
 
