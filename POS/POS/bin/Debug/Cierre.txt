@@ -1,0 +1,32 @@
+TIENDA                       OUTLET
+CAJA                           ADMINISTRADOR
+NUMERO CIERRE            5
+FECHA EMISIÓN         5/12/2018
+FACTURA INICIAL F      549
+FACTURA FINAL F        549
+FACTURA INICIAL P      41
+FACTURA FINAL P        41
+ABONO INICIAL          2
+ABONO FINAL            2
+VENTAS                       MONTO
+----------------------------------
+VENTAS CONTADO      ₡66757.5
+ABONOS                       ₡2000
+VENTAS TARJETA          ₡16515
+ENTRADA CAJA             ₡100000
+SALIDA CAJA                 ₡0
+TOTAL CAJA                  ₡0
+FONDO CAJA                ₡0
+POR ENTREGAR            ₡183272.5
+
+NOTAS
+
+________________________________________
+
+________________________________________
+
+FIRMA CAJERO           FIRMA ADMIN
+
+________________       _________________
+
+Impreso el 5/12/2018 1:27:08 p. m.

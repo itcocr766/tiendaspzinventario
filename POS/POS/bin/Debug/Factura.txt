@@ -1,0 +1,44 @@
+               MODA MULTIMARCAS S.A.
+               
+          PEREZ ZELEDON
+          SAN ISIDRO DEL GENERAL
+               
+    Fecha:     2018-12-21 10:51:44
+
+Tipo Documento:
+Factura Electrónica
+                      No.Factura:
+             00100001010000001805
+                        Clave:
+5062112180031026714690010
+0001010000001805193334505
+                Comprobante: 1431
+        Tipo de pago : Efectivo
+          Facturado por: admin
+Cliente: MAYELA VALVERDE MADRIGAL
+Cantidad        Artículo        Precio        Imp.
+----------------------------------------------------------
+      1          TENI        ₡42500        (G)
+         (50%)  Descuento =   ₡21,250
+      1          TENI        ₡57800        (G)
+         (50%)  Descuento =   ₡28,900
+      1          HULE        ₡1500        (G)
+         (50%)  Descuento =   ₡750
+      1          HULE        ₡1600        (G)
+         (50%)  Descuento =   ₡800
+         (E)=Exento              (G)=Gravado
+ARTICULOS=                      4
+SUBTOTAL=                      ₡45,752
+I.V.A.=                               ₡5,948
+DESCUENTO=                   ₡51,700
+TOTAL=                             ₡51,700
+------------------------------MONTO-------------
+PAGA CON:                        ₡7,847,431
+VUELTO=                           ₡-733,043
+           ARTICULOS CON I.V.I.
+           VENDEDOR : FANNY VINDAS
+----Autorizada mediante resolución--------
+---------N° DGT‐R‐48‐2016 del 07---------
+----------de octubre de 2016.---------------
+----------¡Gracias por su compra!--------------
+********Esperamos servirle de nuevo ************

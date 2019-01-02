@@ -1,0 +1,30 @@
+               MODA MULTIMARCAS S.A.
+               
+          PEREZ ZELEDON
+          SAN ISIDRO DEL GENERAL
+               
+
+    N.CREDITO : 110
+     FECHA  :11/12/2018 8:52:49 a. m.
+      CAJERO: Administrador
+      CLIENTE: CONTADO
+
+Cantidad        Artículo        Precio
+----------------------------------------------------------
+
+    1    niño    9950
+----------------------------------------------------------
+ARTICULOS=   ₡0
+SUBTOTAL=   ₡4402.65486725664
+DESCUENTO=   ₡4975
+TOTAL=   ₡4975
+----------------------------------------------------------
+NOTAS : 
+----------------------------------------------------------
+Cambio por devolución
+
+----Autorizada mediante resolución--------
+---------N° DGT‐R‐48‐2016 del 07---------
+----------de octubre de 2016.---------------
+----------¡Gracias por su compra!--------------
+********Esperamos servirle de nuevo ************
