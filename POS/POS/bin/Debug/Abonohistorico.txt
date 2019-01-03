@@ -1,0 +1,23 @@
+               MODA MULTIMARCAS S.A.
+               
+          PEREZ ZELEDON
+          SAN ISIDRO DEL GENERAL
+               
+------------------------------------------------
+FECHA DEL APARTADO:
+1/3/2019 9:34:03 AM
+FECHA DE VENCIMIENTO:
+4/3/2019 9:34:03 AM
+
+CAJERO: 4
+CLIENTE: MAYELA VALVERDE MADRIGAL
+SALDO INICIAL: 57800
+SALDO ACTUAL: 55800
+------------------------------------------------
+
+ABONOS HASTA EL MOMENTO:
+
+No.Factura              Monto abonado
+#1435	                                    ₡2000
+1/3/2019 9:52:31 AM
+------------------------------------------------

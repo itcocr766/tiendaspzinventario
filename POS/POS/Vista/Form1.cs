@@ -975,7 +975,7 @@ namespace POS
                             cantidad = Int32.Parse(textBox2.Text.Trim());
                             precio = double.Parse(mysql.lector["Precio"].ToString());
                             existencias = Int32.Parse(mysql.lector["OnHand"].ToString());
-                            dataGridView1.Rows.Add(mysql.lector["Barcode"], cantidad, mysql.lector["Descripcion"], precio,existencias, "50", totalsinimpuesto, totalconimpuesto, 10000, impuestoenespanol, "0");
+                            dataGridView1.Rows.Add(mysql.lector["Barcode"], cantidad, mysql.lector["Descripcion"], precio,existencias, "0", totalsinimpuesto, totalconimpuesto, 10000, impuestoenespanol, "0");
                        
                             actualizargridgeneral();
                             calcularTotal();
@@ -987,7 +987,7 @@ namespace POS
                             cantidad = Int32.Parse(textBox2.Text.Trim());
                             precio = double.Parse(mysql.lector["Precio"].ToString());
                             existencias = Int32.Parse(mysql.lector["OnHand"].ToString());
-                            dataGridView1.Rows.Add(mysql.lector["Barcode"], cantidad, mysql.lector["Descripcion"], precio,existencias, "50", totalsinimpuesto, totalconimpuesto, 10000, impuestoenespanol, "0");
+                            dataGridView1.Rows.Add(mysql.lector["Barcode"], cantidad, mysql.lector["Descripcion"], precio,existencias, "0", totalsinimpuesto, totalconimpuesto, 10000, impuestoenespanol, "0");
                        
                             actualizargridgeneral();
                             calcularTotal();
@@ -2302,7 +2302,7 @@ namespace POS
                 "\nVUELTO=                           ₡"
                 + string.Format("{0:n0}", double.Parse(textBox15.Text.Trim())) +
                 "\n           ARTICULOS CON I.V.I." +
-                "\n           VENDEDOR : " + textBox16.Text.Trim() +
+                "\n           VENDEDOR : " + textBox16.Text.Trim() +" F"+
                 "\n----Autorizada mediante resolución--------\n---------N° DGT‐R‐48‐2016 del 07---------\n----------de octubre de 2016.---------------\n----------¡Gracias por su compra!--------------\n********Esperamos servirle de nuevo ************";
 
 
@@ -2351,7 +2351,7 @@ namespace POS
             "\nVUELTO=                           ₡"
             + string.Format("{0:n0}", double.Parse(textBox15.Text.Trim())) +
            "\n           ARTICULOS CON I.V.I." +
-           "\n           VENDEDOR : " + textBox16.Text.Trim() +
+           "\n           VENDEDOR : " + textBox16.Text.Trim() +" P"+
            "\n----Autorizada mediante resolución--------\n---------N° DGT‐R‐48‐2016 del 07---------\n----------de octubre de 2016.---------------\n----------¡Gracias por su compra!--------------\n********Esperamos servirle de nuevo ************";
 
 
@@ -2385,7 +2385,7 @@ namespace POS
             "\nVUELTO=                           ₡"
             + string.Format("{0:n0}", double.Parse(textBox15.Text.Trim())) +
            "\n           ARTICULOS CON I.V.I." +
-           "\n           VENDEDOR : " + textBox16.Text.Trim() +
+           "\n           VENDEDOR : " + textBox16.Text.Trim() +" P"+
            "\n----Autorizada mediante resolución--------\n---------N° DGT‐R‐48‐2016 del 07---------\n----------de octubre de 2016.---------------\n----------¡Gracias por su compra!--------------\n********Esperamos servirle de nuevo ************";
 
 
@@ -2467,7 +2467,7 @@ namespace POS
                 //button3.Enabled = false;
                 //textBox12.Enabled = true;
                 textBox1.Visible = true;
-                dataGridView1.ReadOnly = true;
+                
                 textBox1.Focus();
                 timer2.Stop();
                 timer3.Stop();
@@ -4058,7 +4058,7 @@ namespace POS
               "\nVUELTO=                           ₡"
               + textBox15.Text.Trim() +
               "\n           ARTICULOS CON I.V.I." +
-              "\n           VENDEDOR : " + textBox16.Text.Trim() +
+              "\n           VENDEDOR : " + textBox16.Text.Trim() +" F"+
               "\n----Autorizada mediante resolución--------\n---------N° DGT‐R‐48‐2016 del 07---------\n----------de octubre de 2016.---------------\n----------¡Gracias por su compra!--------------\n********Esperamos servirle de nuevo ************";
 
 
@@ -4095,7 +4095,7 @@ namespace POS
               "\nVUELTO=                           ₡"
               + textBox15.Text.Trim() +
               "\n           ARTICULOS CON I.V.I." +
-              "\n           VENDEDOR : " + textBox16.Text.Trim() +
+              "\n           VENDEDOR : " + textBox16.Text.Trim() +" F"+
               "\n----Autorizada mediante resolución--------\n---------N° DGT‐R‐48‐2016 del 07---------\n----------de octubre de 2016.---------------\n----------¡Gracias por su compra!--------------\n********Esperamos servirle de nuevo ************";
 
 
@@ -4270,7 +4270,7 @@ namespace POS
                 if (conta > 0)
                 {
 
-                    agregarFila();
+               
                     calcularTotal();
                 }
                 else
@@ -4297,20 +4297,14 @@ namespace POS
 
         private void dataGridView1_RowsAdded_1(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            int conta = 0;
+           
             try
             {
-                for (int g = 0; g < dataGridView1.Rows.Count; g++)
-                {
-                    conta++;
-                }
 
-                if (conta > 0)
-                {
-
-                    agregarFila();
+                
+                   
                     calcularTotal();
-                }
+                
                 
 
 

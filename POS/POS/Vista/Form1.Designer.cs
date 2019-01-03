@@ -57,6 +57,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.label52 = new System.Windows.Forms.Label();
             this.textBox19 = new System.Windows.Forms.TextBox();
             this.textBox18 = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -93,17 +94,6 @@
             this.textBox9 = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.monto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descuento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Total_impuesto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totalconimpuesto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.total = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.impuesto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Total_Descuento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel9 = new System.Windows.Forms.Panel();
             this.label43 = new System.Windows.Forms.Label();
@@ -151,7 +141,17 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.timer3 = new System.Windows.Forms.Timer(this.components);
-            this.label52 = new System.Windows.Forms.Label();
+            this.codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.monto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descuento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Total_impuesto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totalconimpuesto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.impuesto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Total_Descuento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -436,6 +436,18 @@
             this.panel5.Size = new System.Drawing.Size(712, 232);
             this.panel5.TabIndex = 1;
             this.panel5.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel5_MouseDown);
+            // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(94)))), ((int)(((byte)(103)))));
+            this.label52.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label52.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.label52.Location = new System.Drawing.Point(20, 6);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(225, 19);
+            this.label52.TabIndex = 34;
+            this.label52.Text = "F6 para búsqueda de productos";
             // 
             // textBox19
             // 
@@ -900,95 +912,12 @@
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(1208, 497);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick_1);
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit_1);
             this.dataGridView1.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridView1_RowsAdded_1);
             this.dataGridView1.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dataGridView1_RowsRemoved_1);
-            // 
-            // codigo
-            // 
-            this.codigo.HeaderText = "Código";
-            this.codigo.Name = "codigo";
-            this.codigo.ReadOnly = true;
-            // 
-            // cantidad
-            // 
-            this.cantidad.HeaderText = "Cantidad";
-            this.cantidad.Name = "cantidad";
-            this.cantidad.ReadOnly = true;
-            // 
-            // descripcion
-            // 
-            this.descripcion.HeaderText = "Descripción";
-            this.descripcion.Name = "descripcion";
-            this.descripcion.ReadOnly = true;
-            // 
-            // precio
-            // 
-            dataGridViewCellStyle1.NullValue = "Precio";
-            this.precio.DefaultCellStyle = dataGridViewCellStyle1;
-            this.precio.HeaderText = "Precio";
-            this.precio.Name = "precio";
-            this.precio.ReadOnly = true;
-            // 
-            // monto
-            // 
-            dataGridViewCellStyle2.NullValue = "Monto";
-            this.monto.DefaultCellStyle = dataGridViewCellStyle2;
-            this.monto.HeaderText = "Existencia";
-            this.monto.Name = "monto";
-            this.monto.ReadOnly = true;
-            // 
-            // Descuento
-            // 
-            dataGridViewCellStyle3.NullValue = "Descuento";
-            this.Descuento.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Descuento.HeaderText = "Descuento";
-            this.Descuento.Name = "Descuento";
-            this.Descuento.ReadOnly = true;
-            // 
-            // Total_impuesto
-            // 
-            dataGridViewCellStyle4.NullValue = "Unitario_sin_impuesto";
-            this.Total_impuesto.DefaultCellStyle = dataGridViewCellStyle4;
-            this.Total_impuesto.HeaderText = "Unitario_sin_impuesto";
-            this.Total_impuesto.Name = "Total_impuesto";
-            this.Total_impuesto.ReadOnly = true;
-            // 
-            // totalconimpuesto
-            // 
-            dataGridViewCellStyle5.NullValue = "Unitario_con_impuesto";
-            this.totalconimpuesto.DefaultCellStyle = dataGridViewCellStyle5;
-            this.totalconimpuesto.HeaderText = "Unitario_con_impuesto";
-            this.totalconimpuesto.Name = "totalconimpuesto";
-            this.totalconimpuesto.ReadOnly = true;
-            // 
-            // total
-            // 
-            dataGridViewCellStyle6.NullValue = "total";
-            this.total.DefaultCellStyle = dataGridViewCellStyle6;
-            this.total.HeaderText = "Total";
-            this.total.Name = "total";
-            this.total.ReadOnly = true;
-            // 
-            // impuesto
-            // 
-            dataGridViewCellStyle7.NullValue = "impuesto";
-            this.impuesto.DefaultCellStyle = dataGridViewCellStyle7;
-            this.impuesto.HeaderText = "Impuesto";
-            this.impuesto.Name = "impuesto";
-            this.impuesto.ReadOnly = true;
-            // 
-            // Total_Descuento
-            // 
-            dataGridViewCellStyle8.NullValue = "Total_Descuento";
-            this.Total_Descuento.DefaultCellStyle = dataGridViewCellStyle8;
-            this.Total_Descuento.HeaderText = "Total_Descuento";
-            this.Total_Descuento.Name = "Total_Descuento";
-            this.Total_Descuento.ReadOnly = true;
             // 
             // panel3
             // 
@@ -1473,7 +1402,6 @@
             // textBox12
             // 
             this.textBox12.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.textBox12.Enabled = false;
             this.textBox12.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox12.Location = new System.Drawing.Point(193, 2);
             this.textBox12.Name = "textBox12";
@@ -1591,17 +1519,86 @@
             // 
             this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
             // 
-            // label52
+            // codigo
             // 
-            this.label52.AutoSize = true;
-            this.label52.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(94)))), ((int)(((byte)(103)))));
-            this.label52.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label52.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.label52.Location = new System.Drawing.Point(20, 6);
-            this.label52.Name = "label52";
-            this.label52.Size = new System.Drawing.Size(225, 19);
-            this.label52.TabIndex = 34;
-            this.label52.Text = "F6 para búsqueda de productos";
+            this.codigo.HeaderText = "Código";
+            this.codigo.Name = "codigo";
+            this.codigo.ReadOnly = true;
+            // 
+            // cantidad
+            // 
+            this.cantidad.HeaderText = "Cantidad";
+            this.cantidad.Name = "cantidad";
+            this.cantidad.ReadOnly = true;
+            // 
+            // descripcion
+            // 
+            this.descripcion.HeaderText = "Descripción";
+            this.descripcion.Name = "descripcion";
+            this.descripcion.ReadOnly = true;
+            // 
+            // precio
+            // 
+            dataGridViewCellStyle1.NullValue = "Precio";
+            this.precio.DefaultCellStyle = dataGridViewCellStyle1;
+            this.precio.HeaderText = "Precio";
+            this.precio.Name = "precio";
+            this.precio.ReadOnly = true;
+            // 
+            // monto
+            // 
+            dataGridViewCellStyle2.NullValue = "Monto";
+            this.monto.DefaultCellStyle = dataGridViewCellStyle2;
+            this.monto.HeaderText = "Existencia";
+            this.monto.Name = "monto";
+            this.monto.ReadOnly = true;
+            // 
+            // Descuento
+            // 
+            dataGridViewCellStyle3.NullValue = "Descuento";
+            this.Descuento.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Descuento.HeaderText = "Descuento";
+            this.Descuento.Name = "Descuento";
+            // 
+            // Total_impuesto
+            // 
+            dataGridViewCellStyle4.NullValue = "Unitario_sin_impuesto";
+            this.Total_impuesto.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Total_impuesto.HeaderText = "Unitario_sin_impuesto";
+            this.Total_impuesto.Name = "Total_impuesto";
+            this.Total_impuesto.ReadOnly = true;
+            // 
+            // totalconimpuesto
+            // 
+            dataGridViewCellStyle5.NullValue = "Unitario_con_impuesto";
+            this.totalconimpuesto.DefaultCellStyle = dataGridViewCellStyle5;
+            this.totalconimpuesto.HeaderText = "Unitario_con_impuesto";
+            this.totalconimpuesto.Name = "totalconimpuesto";
+            this.totalconimpuesto.ReadOnly = true;
+            // 
+            // total
+            // 
+            dataGridViewCellStyle6.NullValue = "total";
+            this.total.DefaultCellStyle = dataGridViewCellStyle6;
+            this.total.HeaderText = "Total";
+            this.total.Name = "total";
+            this.total.ReadOnly = true;
+            // 
+            // impuesto
+            // 
+            dataGridViewCellStyle7.NullValue = "impuesto";
+            this.impuesto.DefaultCellStyle = dataGridViewCellStyle7;
+            this.impuesto.HeaderText = "Impuesto";
+            this.impuesto.Name = "impuesto";
+            this.impuesto.ReadOnly = true;
+            // 
+            // Total_Descuento
+            // 
+            dataGridViewCellStyle8.NullValue = "Total_Descuento";
+            this.Total_Descuento.DefaultCellStyle = dataGridViewCellStyle8;
+            this.Total_Descuento.HeaderText = "Total_Descuento";
+            this.Total_Descuento.Name = "Total_Descuento";
+            this.Total_Descuento.ReadOnly = true;
             // 
             // Form1
             // 
@@ -1753,6 +1750,8 @@
         public System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label50;
         private System.Windows.Forms.ComboBox comboBox4;
+        private System.Windows.Forms.Label label51;
+        private System.Windows.Forms.Label label52;
         private System.Windows.Forms.DataGridViewTextBoxColumn codigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn descripcion;
@@ -1764,8 +1763,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn total;
         private System.Windows.Forms.DataGridViewTextBoxColumn impuesto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Total_Descuento;
-        private System.Windows.Forms.Label label51;
-        private System.Windows.Forms.Label label52;
     }
 }
 

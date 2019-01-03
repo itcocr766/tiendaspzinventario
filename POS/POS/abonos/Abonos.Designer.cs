@@ -79,6 +79,7 @@
             this.comboBox1.Size = new System.Drawing.Size(176, 21);
             this.comboBox1.TabIndex = 2;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.comboBox1.Click += new System.EventHandler(this.comboBox1_Click);
             this.comboBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboBox1_KeyDown);
             // 
             // comboBox2
@@ -404,6 +405,7 @@
             this.dataGridView3.ReadOnly = true;
             this.dataGridView3.Size = new System.Drawing.Size(313, 125);
             this.dataGridView3.TabIndex = 39;
+            this.dataGridView3.Click += new System.EventHandler(this.dataGridView3_Click);
             // 
             // dataGridView2
             // 
@@ -431,6 +433,7 @@
             this.button4.TabIndex = 41;
             this.button4.Text = "Ver histórico";
             this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button3
             // 

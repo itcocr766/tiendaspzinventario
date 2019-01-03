@@ -4,17 +4,23 @@
           SAN ISIDRO DEL GENERAL
                
 ------------------------------------------------
-FECHA:     21/12/2018 10:54:20 a. m.
+FECHA DEL ABONO:
+1/3/2019 9:52:31 AM
+FECHA DEL APARTADO:
+1/3/2019 9:34:03 AM
+FECHA DE VENCIMIENTO:
+4/3/2019 9:34:03 AM
+
 CAJERO: 4
 CLIENTE: MAYELA VALVERDE MADRIGAL
-SALDO INICIAL: 5245
-SALDO ANTERIOR: 5245
-SALDO ACTUAL: 4,245.00
+SALDO INICIAL: 57800
+SALDO ANTERIOR: 57800
+SALDO ACTUAL: 55,800.00
 ------------------------------------------------
 
 ABONOS HASTA EL MOMENTO:
 
 No.Factura              Monto abonado
-#5429	                                    ₡1000
-21/12/2018 10:54:20 a. m.
+#1435	                                    ₡2000
+1/3/2019 9:52:31 AM
 ------------------------------------------------

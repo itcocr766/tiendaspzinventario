@@ -3,40 +3,41 @@
           PEREZ ZELEDON
           SAN ISIDRO DEL GENERAL
                
-    Fecha:     2018-12-21 10:51:44
+    Fecha:     2019-1-3 9:38:47
 
 Tipo Documento:
 Factura Electrónica
                       No.Factura:
-             00100001010000001805
-                        Clave:
-5062112180031026714690010
-0001010000001805193334505
-                Comprobante: 1431
-        Tipo de pago : Efectivo
+                     No. Voucher: 3434
+Clave:
+5060301190031026714690010
+0001010000001933147285683
+Consecutivo 
+00100001010000001933                
+Comprobante: 1437
+        Tipo de pago : Tarjeta
           Facturado por: admin
-Cliente: MAYELA VALVERDE MADRIGAL
+Tipo Documento:
+Factura Electrónica
+
+Cliente: OLDEMAR VALVERDE MADRIGAL
 Cantidad        Artículo        Precio        Imp.
 ----------------------------------------------------------
-      1          TENI        ₡42500        (G)
-         (50%)  Descuento =   ₡21,250
-      1          TENI        ₡57800        (G)
-         (50%)  Descuento =   ₡28,900
       1          HULE        ₡1500        (G)
-         (50%)  Descuento =   ₡750
-      1          HULE        ₡1600        (G)
-         (50%)  Descuento =   ₡800
+         (0%)  Descuento =   ₡0.00
+      1          MUÑECA        ₡8990        (G)
+         (0%)  Descuento =   ₡0.00
          (E)=Exento              (G)=Gravado
-ARTICULOS=                      4
-SUBTOTAL=                      ₡45,752
-I.V.A.=                               ₡5,948
-DESCUENTO=                   ₡51,700
-TOTAL=                             ₡51,700
+ARTICULOS=                      2
+SUBTOTAL=                      ₡9283.18584070797
+I.V.A.=                               ₡1206.81415929203
+DESCUENTO=                   ₡0
+TOTAL=                             ₡10,490
 ------------------------------MONTO-------------
-PAGA CON:                        ₡7,847,431
-VUELTO=                           ₡-733,043
+PAGA CON:                        ₡2,987,349,874
+VUELTO=                           ₡-2,987,339,384.00
            ARTICULOS CON I.V.I.
-           VENDEDOR : FANNY VINDAS
+           VENDEDOR : FANNY VINDAS F
 ----Autorizada mediante resolución--------
 ---------N° DGT‐R‐48‐2016 del 07---------
 ----------de octubre de 2016.---------------

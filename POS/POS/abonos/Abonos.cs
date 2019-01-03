@@ -27,8 +27,8 @@ namespace POS.abonos
         Form1 for1;
         StreamWriter facturawr;
         public static string cedu = "";
-
-
+        string fechavenc = "";
+        string diasvencer = "";
         public Abonos(Form1 f)
         {
             InitializeComponent();
@@ -320,13 +320,42 @@ namespace POS.abonos
                     }
 
 
+                    mysql.cadenasql = "SELECT Fecha FROM saldos WHERE NumFactura='" + comboBox2.Text + "'";
+                    mysql.comando = new MySqlCommand(mysql.cadenasql, mysql.con);
+                    mysql.comando.ExecuteNonQuery();
+                    using (MySqlDataReader lee = mysql.comando.ExecuteReader())
+                    {
+                        while (lee.Read())
+                        {
+                            fechavenc = lee["Fecha"].ToString();
+
+                        }
+                    }
+
+
+                    DateTime feg = DateTime.Parse(fechavenc);
+
+                    //mysql.cadenasql = "SELECT DATE_ADD('date("+ fechavenc + ")',INTERVAL 90 DAY) AS fe";
+                    mysql.cadenasql = "SELECT DATE_ADD('" + feg.ToString("yyyy-MM-dd hh:mm:ss tt") + "',INTERVAL 90 DAY)";
+                    mysql.comando = new MySqlCommand(mysql.cadenasql, mysql.con);
+                    mysql.comando.ExecuteNonQuery();
+                    using (MySqlDataReader lee = mysql.comando.ExecuteReader())
+                    {
+                        while (lee.Read())
+                        {
+                            diasvencer = lee["DATE_ADD('" + feg.ToString("yyyy-MM-dd hh:mm:ss tt") + "',INTERVAL 90 DAY)"].ToString();
+
+                        }
+                    }
 
                     mysql.Dispose();
 
 
                     formato = ConfigurationManager.AppSettings["cadena2"] +
-                        "\n------------------------------------------------" +
-                   "\nFECHA:     " + DateTime.Now.ToString() +
+                      "\n------------------------------------------------" +
+                   "\nFECHA DEL ABONO:\n" + DateTime.Now.ToString() +
+                   "\nFECHA DEL APARTADO:\n" + fechavenc +
+                   "\nFECHA DE VENCIMIENTO:\n" + DateTime.Parse(diasvencer) + "\n" +
                   "\nCAJERO: " + textBox3.Text +
                    "\nCLIENTE: " + nombre +
                    "\nSALDO INICIAL: " + inicial +
@@ -506,7 +535,7 @@ namespace POS.abonos
                 using (var mysql = new Mysql())
                 {
                     mysql.conexion();
-                    mysql.cadenasql = "select * from saldos where CodigoCliente='" + comboBox1.Text + "'";
+                    mysql.cadenasql = "select * from saldos where CodigoCliente='" + comboBox1.Text + "' and Saldo>0 AND datediff(curdate(),Fecha)<=90";
                     mysql.comando = new MySqlCommand(mysql.cadenasql, mysql.con);
                     mysql.comando.ExecuteNonQuery();
                     mysql.lector = mysql.comando.ExecuteReader();
@@ -842,7 +871,7 @@ namespace POS.abonos
                     using (var mysql = new Mysql())
                     {
                         mysql.conexion();
-                        mysql.cadenasql = "select NumFactura from saldos where CodigoCliente='" + dataGridView2.CurrentRow.Cells[0].Value + "' AND datediff(curdate(),Fecha)<=90";
+                        mysql.cadenasql = "select NumFactura from saldos where CodigoCliente='" + dataGridView2.CurrentRow.Cells[0].Value + "' and Saldo>0 AND datediff(curdate(),Fecha)<=90";
                         MySqlDataAdapter adapt = new MySqlDataAdapter(mysql.cadenasql, mysql.con);
                         adapt.Fill(dd);
                         dataGridView3.DataSource = dd;
@@ -862,6 +891,52 @@ namespace POS.abonos
 
 
             }
+        }
+
+        private void dataGridView3_Click(object sender, EventArgs e)
+        {
+            DataTable dd = new DataTable();
+            try
+            {
+                if (dataGridView3.Rows.Count > 0)
+                {
+
+                    dataGridView4.DataSource = null;
+
+                    using (var mysql = new Mysql())
+                    {
+                        mysql.conexion();
+                        mysql.cadenasql = "select Item,Descripcion from items,detalles where detalles.NumeroFactura='" + dataGridView3.CurrentRow.Cells[0].Value + "' and detalles.Item=items.Barcode";
+                        MySqlDataAdapter adapt = new MySqlDataAdapter(mysql.cadenasql, mysql.con);
+                        adapt.Fill(dd);
+                        dataGridView4.DataSource = dd;
+                        mysql.Dispose();
+
+
+                    }
+
+
+
+                }
+
+            }
+            catch (Exception jiu)
+            {
+                MessageBox.Show(jiu.ToString());
+
+
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Busqueda bus = new Busqueda();
+            bus.Show(this);
+        }
+
+        private void comboBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
