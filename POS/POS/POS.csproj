@@ -114,6 +114,18 @@
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Spire.Common, Version=1.12.10.6040, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>..\packages\Spire.XLS.8.12.11\lib\net46\Spire.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.License, Version=1.3.7.46, Culture=neutral, PublicKeyToken=b1144360237c8b3f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Spire.XLS.8.12.11\lib\net46\Spire.License.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.Pdf, Version=4.12.14.2046, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>..\packages\Spire.XLS.8.12.11\lib\net46\Spire.Pdf.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.XLS, Version=8.12.11.6043, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>..\packages\Spire.XLS.8.12.11\lib\net46\Spire.XLS.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -152,6 +164,12 @@
     </Compile>
     <Compile Include="Anular\Anulaciones.Designer.cs">
       <DependentUpon>Anulaciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Anular\anularvarias.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Anular\anularvarias.Designer.cs">
+      <DependentUpon>anularvarias.cs</DependentUpon>
     </Compile>
     <Compile Include="Anular\contr.cs">
       <SubType>Form</SubType>
@@ -292,6 +310,12 @@
     <Compile Include="nc\notascredito.Designer.cs">
       <DependentUpon>notascredito.cs</DependentUpon>
     </Compile>
+    <Compile Include="productosprincipal\cargamasiva.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="productosprincipal\cargamasiva.Designer.cs">
+      <DependentUpon>cargamasiva.cs</DependentUpon>
+    </Compile>
     <Compile Include="productosprincipal\creaitem.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -418,6 +442,9 @@
     <EmbeddedResource Include="Anular\Anulaciones.resx">
       <DependentUpon>Anulaciones.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Anular\anularvarias.resx">
+      <DependentUpon>anularvarias.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Anular\contr.resx">
       <DependentUpon>contr.cs</DependentUpon>
     </EmbeddedResource>
@@ -477,6 +504,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="nc\notascredito.resx">
       <DependentUpon>notascredito.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="productosprincipal\cargamasiva.resx">
+      <DependentUpon>cargamasiva.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="productosprincipal\creaitem.resx">
       <DependentUpon>creaitem.cs</DependentUpon>

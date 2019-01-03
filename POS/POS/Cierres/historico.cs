@@ -3,6 +3,7 @@ using POS.Modelo;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Printing;
@@ -88,7 +89,7 @@ namespace POS.Cierres
                     {
                         while (lee.Read())
                         {
-                            formato = "TIENDA                    OUTLET\n" +
+                            formato = "TIENDA                    " + ConfigurationManager.AppSettings["cierreimp"]+"\n"+
                             "CAJA                           ADMINISTRADOR\n" +
                             "NUMERO CIERRE            " + lee["Numero"] + "\n" +
                             "FECHA EMISIÓN         " + Convert.ToDateTime(lee["Fecha"].ToString()).ToShortDateString() + "\n" +

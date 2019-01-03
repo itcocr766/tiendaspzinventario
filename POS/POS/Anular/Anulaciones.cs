@@ -1,6 +1,7 @@
 ﻿using Microsoft.CSharp.RuntimeBinder;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
+using POS.Anular;
 using POS.Devoluciones;
 using POS.HACIENDA;
 using POS.Modelo;
@@ -252,7 +253,7 @@ namespace POS
 
                                     f.Key = new KEY()
                                     {
-                                        Branch = "002",
+                                        Branch = ConfigurationManager.AppSettings["sucur"],
                                         Terminal = "001",
                                         Type = "03",
                                         Voucher = string.Concat(ConfigurationManager.AppSettings["idcomp"] + "14", (Int32.Parse(dataGridView1.CurrentRow.Cells[0].Value.ToString())).ToString()),
@@ -932,5 +933,14 @@ namespace POS
                 e.Handled = true;
             }
         }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            anularvarias av = new anularvarias();
+            av.Show();
+        }
+
+
+       
     }
 }

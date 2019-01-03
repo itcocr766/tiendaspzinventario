@@ -445,7 +445,7 @@ namespace POS.Cierres
                 }
 
 
-                formato = "TIENDA                       OUTLET\n" +
+                formato = "TIENDA                       " + ConfigurationManager.AppSettings["cierreimp"]+"\n"+
                               "CAJA                           ADMINISTRADOR\n" +
                               "NUMERO CIERRE            " + numero + "\n" +
                               "FECHA EMISIÓN         " + DateTime.Now.ToShortDateString() + "\n" +

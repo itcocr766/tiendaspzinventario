@@ -158,5 +158,11 @@ namespace POS.Vista
             descuento descc = new descuento();
             descc.Show(this);
         }
+
+        private void cargaMasivaDeInventarioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            cargamasiva cm = new cargamasiva();
+            cm.Show(this);
+        }
     }
 }

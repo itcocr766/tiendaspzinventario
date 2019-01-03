@@ -52,6 +52,10 @@
             this.label18 = new System.Windows.Forms.Label();
             this.button7 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.cargaMasivaDeInventarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.anulacionesEnConjuntoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label6
@@ -317,6 +321,30 @@
             this.label5.TabIndex = 70;
             this.label5.Text = "Descuentos";
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cargaMasivaDeInventarioToolStripMenuItem,
+            this.anulacionesEnConjuntoToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1030, 24);
+            this.menuStrip1.TabIndex = 71;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // cargaMasivaDeInventarioToolStripMenuItem
+            // 
+            this.cargaMasivaDeInventarioToolStripMenuItem.Name = "cargaMasivaDeInventarioToolStripMenuItem";
+            this.cargaMasivaDeInventarioToolStripMenuItem.Size = new System.Drawing.Size(162, 20);
+            this.cargaMasivaDeInventarioToolStripMenuItem.Text = "Carga masiva de inventario";
+            this.cargaMasivaDeInventarioToolStripMenuItem.Click += new System.EventHandler(this.cargaMasivaDeInventarioToolStripMenuItem_Click);
+            // 
+            // anulacionesEnConjuntoToolStripMenuItem
+            // 
+            this.anulacionesEnConjuntoToolStripMenuItem.Name = "anulacionesEnConjuntoToolStripMenuItem";
+            this.anulacionesEnConjuntoToolStripMenuItem.Size = new System.Drawing.Size(151, 20);
+            this.anulacionesEnConjuntoToolStripMenuItem.Text = "Anulaciones en conjunto";
+            // 
             // administracion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -347,15 +375,19 @@
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
+            this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "administracion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "administracion";
             this.Load += new System.EventHandler(this.administracion_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.administracion_KeyDown);
             this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.administracion_PreviewKeyDown);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -385,5 +417,8 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem cargaMasivaDeInventarioToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem anulacionesEnConjuntoToolStripMenuItem;
     }
 }
