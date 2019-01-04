@@ -367,9 +367,11 @@ namespace POS
 
                     using (MySqlDataReader lee = mysql.comando.ExecuteReader())
                     {
+                       
+
                         while (lee.Read())
-                        {
-                            if (lee["Max(Numero)"].ToString()!=null)
+                        { 
+                            if (lee["Max(Numero)"]!=null)
                             {
                                 idFac = Int32.Parse(string.Concat((ConfigurationManager.AppSettings["idcomp"] + textBox4.Text), (Int32.Parse(lee["Max(Numero)"].ToString().Substring(Int32.Parse(ConfigurationManager.AppSettings["subs"]))) + 1).ToString()));
                               
@@ -1717,49 +1719,6 @@ namespace POS
                 }
                 else if (comboBox1.Text != "" && comboBox4.Text != "" && comboBox3.Text.Trim() != "" && textBox17.Text != "" && textBox16.Text != "" && dataGridView1.Rows.Count > 0)
                 {
-
-
-                    //metersale();
-
-                    //    meterFactura();
-                    //    formatodeactura();
-
-                    //    if (impri)
-                    //    {
-
-
-                    //        for (int imp = 0; imp < Int32.Parse(numericUpDown1.Value.ToString()); imp++)
-                    //        {
-                    //            imprimir();
-
-                    //        }
-
-
-                    //        limpiar();
-
-                    //    }
-                    //    else
-                    //    {
-
-                    //        MessageBox.Show("Por favor vuelva  a intentar imprimir la factura", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    //    }
-
-
-
-
-
-
-
-                    //}
-                    //else
-                    //{
-                    //    Mensaje_Warning("Parece que no todos los datos estan correctos. \nPor favor verifique que el tipo de pago y toda la informacion este correcta");
-                    //}
-
-
-                    //timer3.Stop();
-                    //textBox15.BackColor = Color.WhiteSmoke;
-
 
 
                     if (comboBox1.Text == "Tarjeta")

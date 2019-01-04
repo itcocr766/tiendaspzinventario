@@ -5,12 +5,14 @@ using POS.Anular;
 using POS.Devoluciones;
 using POS.HACIENDA;
 using POS.Modelo;
+using Spire.Xls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -49,6 +51,7 @@ namespace POS
         decimal price;
         decimal canti;
         Form1 ef;
+        string ce = "";
         public Anulaciones(Form1 efe1)
         {
             InitializeComponent();detalles = new List<DETAIL>();enviarfactura = new ENVIO();
@@ -163,7 +166,492 @@ namespace POS
 
         private void button1_Click(object sender, EventArgs e)
         {
-           
+
+
+            anulacion();
+
+    
+        }
+
+
+        public string sabersiessaleofactura(string numero,string fecha)
+        {
+            string tipo="";
+            try
+            {
+                using (var mysql=new Mysql())
+                {
+                    mysql.conexion();
+                    mysql.cadenasql = "select count(*) from factura where Numero='"+numero+"' and Fecha ='"+fecha+"'";
+                    mysql.comando = new MySqlCommand(mysql.cadenasql,mysql.con);
+                    mysql.comando.ExecuteNonQuery();
+
+                    using (MySqlDataReader lee=mysql.comando.ExecuteReader())
+                    {
+                        while (lee.Read())
+                        {
+                            if (Int64.Parse(lee["count(*)"].ToString())>0)
+                            {
+                                tipo = "factura";
+                            }
+                            else
+                            {
+                                tipo = "sales";
+                            }
+                        }
+                    }
+                        mysql.Dispose();
+                }
+            }
+            catch (Exception h)
+            {
+                MessageBox.Show(h.Message,"Error",MessageBoxButtons.OK,MessageBoxIcon.Hand);
+            }
+            return tipo;
+        }
+
+        public void anularvarias()
+        {
+            for (int g=0;g<dataGridView1.Rows.Count;g++)
+            {
+                naturaleza = "";
+                impuestofe = 0;
+                unitprice = 0;
+                totalamountfe = 0;
+                discountfe = 0;
+                totallineamountfe = 0;
+                subtotalfe = 0;
+                totaltaxedgoodsfe = 0;
+                totaltaxedfe = 0;
+                totalexcemptfe = 0;
+                totalexcemptgoodsfe = 0;
+                totalnetsalesfe = 0;
+                totalsalesfe = 0;
+                impuestototal = 0;
+
+                int conta = 0;
+                price = 0;
+                canti = 0;
+                desctotalfe = 0;
+                int admi = 0;
+                try
+                {
+                    //MessageBox.Show(ef.textBox4.Text);
+                    using (var mysql3 = new Mysql())
+                    {
+                        mysql3.conexion();
+
+                        mysql3.cadenasql = "select Admin from registro where Codigo='" + ef.textBox4.Text + "'";
+                        mysql3.comando = new MySqlCommand(mysql3.cadenasql, mysql3.con);
+                        mysql3.comando.ExecuteNonQuery();
+                        using (MySqlDataReader leec = mysql3.comando.ExecuteReader())
+                        {
+                            while (leec.Read())
+                            {
+                                admi = Int32.Parse(leec["Admin"].ToString());
+                            }
+
+
+                        }
+                        mysql3.Dispose();
+                    }
+
+                    switch (admi)
+                    {
+                        case 0:
+                            MessageBox.Show("No tiene suficiente permiso para anular facturas.\nContacte un administrador ", "No tiene permiso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            break;
+                        case 1:
+                            if (dataGridView1.DataSource != null)
+                            {
+                                DateTime feee = DateTime.Parse(dataGridView1.Rows[g].Cells[1].Value.ToString());
+                                string feeestring = feee.ToString("yyyy-MM-dd HH:mm:ss tt",CultureInfo.InvariantCulture);
+                                if (sabersiessaleofactura(dataGridView1.Rows[g].Cells[0].Value.ToString(), feeestring) =="factura")
+                                {
+                                    //MessageBox.Show("correcto");
+                                    using (var mysql = new Mysql())
+                                    {
+                                        mysql.conexion();
+
+                                        mysql.cadenasql = "update factura set Total='0' where Numero='" + dataGridView1.Rows[g].Cells[0].Value + "'";
+                                        mysql.comando = new MySqlCommand(mysql.cadenasql, mysql.con);
+                                        mysql.comando.ExecuteNonQuery();
+
+                                        mysql.Dispose();
+
+
+                                    }
+
+
+                                        FE f = new FE()
+                                        {
+                                            CompanyAPI = ConfigurationManager.AppSettings["apicomp"]
+
+                                          
+
+                                        };
+
+
+
+                                        f.Key = new KEY()
+                                        {
+                                            Branch = ConfigurationManager.AppSettings["sucur"],
+                                            Terminal = "001",
+                                            Type = "03",
+                                            Voucher = string.Concat(ConfigurationManager.AppSettings["idcomp"] + "14", (Int32.Parse(dataGridView1.Rows[g].Cells[0].Value.ToString())).ToString()),
+                                            //Voucher = "444448",
+                                            Country = "506",
+                                            Situation = "1"
+
+                                        };
+
+                                        f.Header = new HEADER()
+                                        {
+                                            Date = DateTime.Now.Date,
+                                            TermOfSale = "01",
+                                            CreditTerm = 0,
+                                            PaymentMethod = "01"
+                                        };
+
+                                    //hacer consultas de receiver
+
+
+                                    using (var mys=new Mysql())
+                                    {
+                                        mys.conexion();
+                                        mys.cadenasql = "SELECT Cedula,Nombre from clientes,factura WHERE clientes.Cedula=factura.Cliente  AND factura.Numero='"+dataGridView1.Rows[g].Cells[0].Value+"'";
+                                        mys.comando = new MySqlCommand(mys.cadenasql,mys.con);
+                                        mys.comando.ExecuteNonQuery();
+                                        using (MySqlDataReader l=mys.comando.ExecuteReader())
+                                        {
+                                            while (l.Read())
+                                            {
+                                                ce = l["Cedula"].ToString();
+                                                if (l["Nombre"].ToString() == "0")
+                                                {
+                                                    f.Receiver = new RECEIVER()
+                                                    {
+                                                        Name = "Contado",
+                                                        Identification = new IDENTIFICATION
+                                                        {
+                                                            Type = "01",
+                                                            Number = "000000000"
+
+                                                        },
+                                                        Email = "Contado@correo.com"
+
+                                                    };
+
+                                                    eltipo = "04";
+
+                                                }
+                                                else
+                                                {
+                                                    using (var mysql = new Mysql())
+                                                    {
+                                                        mysql.conexion();
+
+                                                        mysql.cadenasql = "select Cedula,Nombre,Correo from clientes where Cedula='" + ce + "'";
+                                                        mysql.comando = new MySqlCommand(mysql.cadenasql, mysql.con);
+                                                        mysql.comando.ExecuteNonQuery();
+                                                        mysql.lector = mysql.comando.ExecuteReader();
+                                                        while (mysql.lector.Read())
+                                                        {
+                                                            f.Receiver = new RECEIVER()
+                                                            {
+                                                                Name = mysql.lector["Nombre"].ToString(),
+                                                                Identification = new IDENTIFICATION
+                                                                {
+                                                                    Type = "01",
+                                                                    Number = ce
+
+                                                                },
+                                                                Email = mysql.lector["Correo"].ToString()
+
+                                                            };
+
+                                                        }
+                                                        eltipo = "01";
+                                                        mysql.Dispose();
+                                                    }
+
+                                                }
+                                            }
+
+                                        }
+                                            mys.Dispose();
+
+                                    }
+
+                                       
+
+
+
+
+                                        detalles.Clear();
+                                        f.Detail = null;
+
+
+                                        using (var mysql = new Mysql())
+                                        {
+                                            mysql.conexion();
+
+                                            mysql.cadenasql = "select * from detalles where NumeroFactura='" + dataGridView1.Rows[g].Cells[0].Value.ToString() + "'";
+                                            mysql.comando = new MySqlCommand(mysql.cadenasql, mysql.con);
+                                            mysql.comando.ExecuteNonQuery();
+                                            mysql.lector = mysql.comando.ExecuteReader();
+                                            while (mysql.lector.Read())
+                                            {
+
+                                                if (mysql.lector["Impuesto"].ToString() == "(G)")
+                                                {
+
+                                                    price = Convert.ToDecimal(mysql.lector["Precio"].ToString());
+                                                    canti = Convert.ToDecimal(mysql.lector["Cantidad"].ToString());
+                                                    discountfe = Convert.ToDecimal(mysql.lector["Descuento"].ToString()) / 1.13m;
+                                                    unitprice = decimal.Round((price / 1.13m), 2, MidpointRounding.AwayFromZero);
+                                                    impuestofe = decimal.Round((((unitprice * canti) - discountfe) * 13) / 100, 2, MidpointRounding.AwayFromZero);
+                                                    totaltaxedgoodsfe += decimal.Round(((unitprice * canti)), 2, MidpointRounding.AwayFromZero);
+                                                    totalsalesfe += decimal.Round(((totaltaxedgoodsfe + totalexcemptgoodsfe)), 2, MidpointRounding.AwayFromZero);
+                                                    totalnetsalesfe += decimal.Round(((totalsalesfe - discountfe)), 2, MidpointRounding.AwayFromZero);
+                                                    totaltaxedfe += decimal.Round(((unitprice * canti)), 2, MidpointRounding.AwayFromZero);
+                                                    impuestototal += decimal.Round(impuestofe, 2, MidpointRounding.AwayFromZero);
+
+
+                                                    losimpuestos = new TAX()
+                                                    {
+                                                        Code = "01",
+                                                        Rate = 13.0m,
+                                                        Amount = decimal.Round(impuestofe, 2, MidpointRounding.AwayFromZero),
+                                                        Exoneration = null
+                                                    };
+
+                                                    totalamountfe = decimal.Round(((unitprice * canti)), 2, MidpointRounding.AwayFromZero);
+                                                    desctotalfe += decimal.Round(discountfe, 2, MidpointRounding.AwayFromZero);
+                                                    subtotalfe = decimal.Round(((totalamountfe - discountfe)), 2, MidpointRounding.AwayFromZero);
+                                                    totallineamountfe = decimal.Round((subtotalfe + impuestofe), 2, MidpointRounding.AwayFromZero);
+
+                                                    if (discountfe > 0)
+                                                    {
+                                                        naturaleza = "descuento de " + discountfe.ToString();
+
+                                                    }
+                                                    else
+                                                    {
+                                                        naturaleza = "";
+                                                    }
+                                                    DETAIL detail = new DETAIL()
+                                                    {
+                                                        Number = conta += 1,
+                                                        Code = new CODE
+                                                        {
+                                                            Type = "04",
+                                                            Code = mysql.lector["Item"].ToString()
+                                                        },
+                                                        Tax = new List<TAX>()
+                                        {
+                                            losimpuestos
+                                        },
+
+                                                        Quantity = decimal.Parse(mysql.lector["Cantidad"].ToString()),
+                                                        UnitOfMeasure = "kg",
+                                                        CommercialUnitOfMeasure = null,
+                                                        Detail = mysql.lector["Item"].ToString(),
+                                                        UnitPrice = unitprice,
+                                                        TotalAmount = totalamountfe,
+                                                        Discount = decimal.Round(discountfe, 2, MidpointRounding.AwayFromZero),
+                                                        NatureOfDiscount = naturaleza,
+                                                        SubTotal = subtotalfe,
+                                                        TotalLineAmount = totallineamountfe
+
+                                                    };
+                                                    detalles.Add(detail);
+                                                }
+                                                else
+                                                {
+                                                    price = Convert.ToDecimal(mysql.lector["Precio"].ToString());
+                                                    canti = Convert.ToDecimal(mysql.lector["Cantidad"].ToString());
+                                                    discountfe = Convert.ToDecimal(mysql.lector["Descuento"].ToString());
+                                                    impuestofe = 0;
+
+                                                    unitprice = price;
+                                                    totaltaxedgoodsfe += 0;
+                                                    totaltaxedfe += 0;
+
+
+                                                    totalamountfe = decimal.Round(((unitprice * canti)), 2, MidpointRounding.AwayFromZero);
+                                                    desctotalfe += decimal.Round(discountfe, 2, MidpointRounding.AwayFromZero);
+                                                    totalexcemptgoodsfe += decimal.Round(((unitprice * canti)), 2, MidpointRounding.AwayFromZero);
+                                                    totalexcemptfe += decimal.Round(((unitprice * canti)), 2, MidpointRounding.AwayFromZero);
+                                                    totalsalesfe += decimal.Round(((totaltaxedgoodsfe + totalexcemptgoodsfe)), 2, MidpointRounding.AwayFromZero);
+                                                    totalnetsalesfe += decimal.Round(((totalsalesfe - discountfe)), 2, MidpointRounding.AwayFromZero);
+                                                    subtotalfe = decimal.Round(((totalamountfe - discountfe)), 2, MidpointRounding.AwayFromZero);
+                                                    totallineamountfe = decimal.Round((subtotalfe + impuestofe), 2, MidpointRounding.AwayFromZero);
+
+                                                    if (discountfe > 0)
+                                                    {
+                                                        naturaleza = "descuento de " + discountfe.ToString();
+
+                                                    }
+                                                    else
+                                                    {
+                                                        naturaleza = "";
+                                                    }
+                                                    DETAIL detail = new DETAIL()
+                                                    {
+                                                        Number = conta += 1,
+                                                        Code = new CODE
+                                                        {
+                                                            Type = "04",
+                                                            Code = mysql.lector["Item"].ToString()
+                                                        },
+
+
+                                                        Quantity = decimal.Parse(mysql.lector["Cantidad"].ToString()),
+                                                        UnitOfMeasure = "kg",
+                                                        CommercialUnitOfMeasure = null,
+                                                        Detail = mysql.lector["Item"].ToString(),
+                                                        UnitPrice = unitprice,
+                                                        TotalAmount = totalamountfe,
+                                                        Discount = decimal.Round(discountfe, 2, MidpointRounding.AwayFromZero),
+                                                        NatureOfDiscount = naturaleza,
+                                                        SubTotal = subtotalfe,
+                                                        TotalLineAmount = totallineamountfe
+
+                                                    };
+                                                    detalles.Add(detail);
+                                                }
+
+                                            }
+                                            f.Detail = detalles;
+                                            mysql.Dispose();
+
+                                        }
+
+
+
+                                        using (var mysql = new Mysql())
+                                        {
+                                            mysql.conexion();
+                                            mysql.cadenasql = "select Clave from hacienda where Comprobante='" + dataGridView1.Rows[g].Cells[0].Value.ToString() + "'";
+                                            mysql.comando = new MySqlCommand(mysql.cadenasql, mysql.con);
+                                            mysql.comando.ExecuteNonQuery();
+                                            mysql.lector = mysql.comando.ExecuteReader();
+
+                                            while (mysql.lector.Read())
+                                            {
+
+                                                REFERENCE refe = new REFERENCE()
+                                                {
+                                                    DocumentType = eltipo,
+                                                    DocumentNumber = mysql.lector["Clave"].ToString(),
+                                                    Code = "01",
+                                                    Reason = "El cliente quizo cambiar o devolver algunos productos"
+                                                };
+
+
+                                                f.Reference = new List<REFERENCE>()
+                            {
+                                refe
+                            };
+
+                                            }
+                                            mysql.Dispose();
+                                        }
+
+
+
+
+
+                                        f.Summary = new SUMMARY()
+                                        {
+                                            Currency = "CRC",
+                                            ExchangeRate = 1,
+                                            TotalTaxedService = 0,
+                                            TotalExemptService = 0,
+                                            TotalTaxedGoods = decimal.Round(totaltaxedgoodsfe, 2, MidpointRounding.AwayFromZero),
+                                            TotalExemptGoods = decimal.Round(totalexcemptgoodsfe, 2, MidpointRounding.AwayFromZero),
+                                            TotalTaxed = decimal.Round(totaltaxedfe, 2, MidpointRounding.AwayFromZero),
+                                            TotalExempt = decimal.Round(totalexcemptfe, 2, MidpointRounding.AwayFromZero),
+                                            TotalSale = decimal.Round((totaltaxedgoodsfe + totalexcemptgoodsfe), 2, MidpointRounding.AwayFromZero),
+                                            TotalDiscounts = decimal.Round(desctotalfe, 2, MidpointRounding.AwayFromZero),
+                                            TotalNetSale = decimal.Round(((totaltaxedgoodsfe + totalexcemptgoodsfe) - desctotalfe), 2, MidpointRounding.AwayFromZero),
+                                            TotalTaxes = decimal.Round(impuestototal, 2, MidpointRounding.AwayFromZero),
+                                            TotalVoucher = decimal.Round((totaltaxedgoodsfe + totalexcemptgoodsfe + impuestototal) - desctotalfe, 2, MidpointRounding.AwayFromZero)
+                                        };
+
+                                        json = JsonConvert.SerializeObject(f, Newtonsoft.Json.Formatting.Indented);
+
+
+
+
+                                        string strJSON = string.Empty;
+
+
+
+
+                                        SendInvoicesAGC(f);
+
+                                }
+                                else
+                                {
+
+
+                                    using (var mysql = new Mysql())
+                                    {
+                                        mysql.conexion();
+
+                                        mysql.cadenasql = "update sales set Total='0' where Numero='" + dataGridView1.Rows[g].Cells[0].Value + "'";
+                                        mysql.comando = new MySqlCommand(mysql.cadenasql, mysql.con);
+                                        mysql.comando.ExecuteNonQuery();
+
+                                        mysql.Dispose();
+
+
+                                    }
+
+                                }
+
+
+
+
+
+
+                            }
+                            else
+                            {
+                                MessageBox.Show("Faltan datos", "Faltan Datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            }
+
+                            break;
+                        default:
+                            MessageBox.Show("Un error inesperado ha ocurrido.\nContacte un administrador", "Error desconocido", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            break;
+                    }
+
+
+                   
+
+                }
+
+                catch (NullReferenceException nue)
+                {
+                    MessageBox.Show("Faltan datos", "Faltan datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+
+
+                catch (Exception es)
+                {
+                    MessageBox.Show("Hubo un error a conectar a la base de datos" + es.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
+
+            MessageBox.Show("Las facturas han sido anuladas", "Solicitud procesada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        public void anulacion()
+        {
             naturaleza = "";
             impuestofe = 0;
             unitprice = 0;
@@ -178,7 +666,7 @@ namespace POS
             totalnetsalesfe = 0;
             totalsalesfe = 0;
             impuestototal = 0;
-          
+
             int conta = 0;
             price = 0;
             canti = 0;
@@ -187,23 +675,23 @@ namespace POS
             try
             {
                 //MessageBox.Show(ef.textBox4.Text);
-                using (var mysql3= new Mysql())
+                using (var mysql3 = new Mysql())
                 {
                     mysql3.conexion();
-               
-                    mysql3.cadenasql = "select Admin from registro where Codigo='"+ef.textBox4.Text+"'";
+
+                    mysql3.cadenasql = "select Admin from registro where Codigo='" + ef.textBox4.Text + "'";
                     mysql3.comando = new MySqlCommand(mysql3.cadenasql, mysql3.con);
                     mysql3.comando.ExecuteNonQuery();
-                    using (MySqlDataReader leec=mysql3.comando.ExecuteReader())
+                    using (MySqlDataReader leec = mysql3.comando.ExecuteReader())
                     {
                         while (leec.Read())
                         {
                             admi = Int32.Parse(leec["Admin"].ToString());
                         }
 
-                     
+
                     }
-                        mysql3.Dispose();
+                    mysql3.Dispose();
                 }
 
                 switch (admi)
@@ -212,7 +700,7 @@ namespace POS
                         MessageBox.Show("No tiene suficiente permiso para anular facturas.\nContacte un administrador ", "No tiene permiso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         break;
                     case 1:
-                        if (dataGridView1.DataSource!=null)
+                        if (dataGridView1.DataSource != null)
                         {
 
                             if (dataGridView1.Columns.Count == 9)
@@ -347,7 +835,7 @@ namespace POS
 
                                                 price = Convert.ToDecimal(mysql.lector["Precio"].ToString());
                                                 canti = Convert.ToDecimal(mysql.lector["Cantidad"].ToString());
-                                                discountfe = Convert.ToDecimal(mysql.lector["Descuento"].ToString())/1.13m;
+                                                discountfe = Convert.ToDecimal(mysql.lector["Descuento"].ToString()) / 1.13m;
                                                 unitprice = decimal.Round((price / 1.13m), 2, MidpointRounding.AwayFromZero);
                                                 impuestofe = decimal.Round((((unitprice * canti) - discountfe) * 13) / 100, 2, MidpointRounding.AwayFromZero);
                                                 totaltaxedgoodsfe += decimal.Round(((unitprice * canti)), 2, MidpointRounding.AwayFromZero);
@@ -521,17 +1009,17 @@ namespace POS
 
                                     json = JsonConvert.SerializeObject(f, Newtonsoft.Json.Formatting.Indented);
 
-                              
+
 
 
                                     string strJSON = string.Empty;
 
-                             
+
 
 
                                     SendInvoicesAGC(f);
 
-                               
+
 
 
                                 }
@@ -573,7 +1061,7 @@ namespace POS
                         {
                             MessageBox.Show("Faltan datos", "Faltan Datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         }
-                       
+
                         break;
                     default:
                         MessageBox.Show("Un error inesperado ha ocurrido.\nContacte un administrador", "Error desconocido", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -582,12 +1070,12 @@ namespace POS
 
 
 
-                    
+
             }
 
             catch (NullReferenceException nue)
             {
-                MessageBox.Show("Faltan datos" ,"Faltan datos",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                MessageBox.Show("Faltan datos", "Faltan datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
 
 
@@ -595,9 +1083,6 @@ namespace POS
             {
                 MessageBox.Show("Hubo un error a conectar a la base de datos" + es.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        
-
-    
         }
 
         public static Respuesta SendInvoicesAGC(FE factura)
@@ -936,11 +1421,80 @@ namespace POS
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            anularvarias av = new anularvarias();
-            av.Show();
+            anularvarias();
+           
         }
 
 
-       
+        public void cargararchivo()
+        {
+            try
+            {
+
+                button1.Enabled = false;
+
+
+
+                OpenFileDialog ofd = new OpenFileDialog();
+                ofd.InitialDirectory = @"C:\";
+                ofd.Filter = "Excel Worksheets|*.xlsx";
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    label4.Text = ofd.FileName;
+                    string fileName;
+                    fileName = label4.Text;
+                    Workbook workbook = new Workbook();
+                    workbook.LoadFromFile(fileName);
+                    Worksheet sheet = workbook.Worksheets[0];
+                    dataGridView1.DataSource = sheet.ExportDataTable();
+                    if (dataGridView1.Rows.Count > 0&&dataGridView1.Columns.Count==2)
+                    {
+                        button2.Enabled = true;
+
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ingrese los datos del archivo. Asegurese que la ruta sea la correcta", "Faltan datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        dataGridView1.DataSource = null;
+                        button1.Enabled = true;
+                        button2.Enabled = false;
+
+                    }
+
+                }
+
+
+
+            }
+            catch (Exception r)
+            {
+                MessageBox.Show(r.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            }
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            cargararchivo();
+        
+        }
+
+        public void reemplazar()
+        {
+            for (int y=0;y<dataGridView1.Rows.Count;y++)
+            {
+                dataGridView1.Rows[y].Cells[1].Value = dataGridView1.Rows[y].Cells[1].Value.ToString().Replace("/","-");
+                dataGridView1.Rows[y].Cells[1].Value = dataGridView1.Rows[y].Cells[1].Value.ToString().Replace("P", "");
+                dataGridView1.Rows[y].Cells[1].Value = dataGridView1.Rows[y].Cells[1].Value.ToString().Replace("M", "");
+                dataGridView1.Rows[y].Cells[1].Value = dataGridView1.Rows[y].Cells[1].Value.ToString().Replace("A", "");
+                dataGridView1.Rows[y].Cells[1].Value = dataGridView1.Rows[y].Cells[1].Value.ToString().Replace("M", "");
+            }
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

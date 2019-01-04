@@ -9580,4 +9580,3 @@ C:\Users\rix\Documents\itco\tiendaspzconinventario\tiendasconinventario\POS\POS\
 C:\Users\rix\Documents\itco\tiendaspzconinventario\tiendasconinventario\POS\POS\obj\Debug\POS.csproj.CopyComplete
 C:\Users\rix\Documents\itco\tiendaspzconinventario\tiendasconinventario\POS\POS\obj\Debug\POS.exe
 C:\Users\rix\Documents\itco\tiendaspzconinventario\tiendasconinventario\POS\POS\obj\Debug\POS.pdb
-C:\Users\rix\Documents\itco\tiendaspzconinventario\tiendasconinventario\POS\POS\obj\Debug\POS.Anular.anularvarias.resources
