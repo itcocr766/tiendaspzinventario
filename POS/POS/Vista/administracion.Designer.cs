@@ -54,7 +54,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.cargaMasivaDeInventarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.anulacionesEnConjuntoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -324,8 +323,7 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cargaMasivaDeInventarioToolStripMenuItem,
-            this.anulacionesEnConjuntoToolStripMenuItem});
+            this.cargaMasivaDeInventarioToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1030, 24);
@@ -338,12 +336,6 @@
             this.cargaMasivaDeInventarioToolStripMenuItem.Size = new System.Drawing.Size(162, 20);
             this.cargaMasivaDeInventarioToolStripMenuItem.Text = "Carga masiva de inventario";
             this.cargaMasivaDeInventarioToolStripMenuItem.Click += new System.EventHandler(this.cargaMasivaDeInventarioToolStripMenuItem_Click);
-            // 
-            // anulacionesEnConjuntoToolStripMenuItem
-            // 
-            this.anulacionesEnConjuntoToolStripMenuItem.Name = "anulacionesEnConjuntoToolStripMenuItem";
-            this.anulacionesEnConjuntoToolStripMenuItem.Size = new System.Drawing.Size(151, 20);
-            this.anulacionesEnConjuntoToolStripMenuItem.Text = "Anulaciones en conjunto";
             // 
             // administracion
             // 
@@ -419,6 +411,5 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem cargaMasivaDeInventarioToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem anulacionesEnConjuntoToolStripMenuItem;
     }
 }
