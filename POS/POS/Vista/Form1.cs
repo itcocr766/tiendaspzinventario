@@ -215,8 +215,7 @@ namespace POS
                 timer1.Interval = 10;
                     timer1.Start();
             
-                    //comboBox1.SelectedIndex = 0;
-                   
+                    
                     label7.Text = DateTime.Now.ToShortDateString();
                     label8.Text = DateTime.Now.ToShortTimeString();
 
@@ -239,8 +238,7 @@ namespace POS
                 metodo();
                 descuent();
                 dictionary();
-                //administracion();
-
+               
             }
             catch (Exception err_005)
             {
