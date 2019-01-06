@@ -38,6 +38,7 @@ namespace POS
 {
     public partial class Form1 : Form
     {
+        int control = 0;
         string numerodevoucher = "";
         string lafecha="";
         Dictionary<string, string> diccionario;
@@ -939,7 +940,7 @@ namespace POS
 
         public void llenar(string codigo)
         {
-
+            control = 0;
             descuentos = 0;
             int cantidad = 0;
             double precio = 0;
@@ -959,39 +960,60 @@ namespace POS
 
                     mysql.conexion();
 
-                    mysql.cadenasql = "select * from items where Barcode='" + codigo + "'";
+                    mysql.cadenasql = "SELECT * from items where Barcode='" + codigo + "'";
                     mysql.comando = new MySqlCommand(mysql.cadenasql, mysql.con);
                     mysql.comando.ExecuteNonQuery();
                     mysql.lector = mysql.comando.ExecuteReader();
 
                     if (mysql.lector.Read())
                     {
-
-
-
-                        if (mysql.lector["Impuesto"].ToString() == "Impuesto")
+                        if (dataGridView1.Rows.Count>0)
                         {
-                            impuestoenespanol = "(G)";
-                            cantidad = Int32.Parse(textBox2.Text.Trim());
-                            precio = double.Parse(mysql.lector["Precio"].ToString());
-                            existencias = Int32.Parse(mysql.lector["OnHand"].ToString());
-                            dataGridView1.Rows.Add(mysql.lector["Barcode"], cantidad, mysql.lector["Descripcion"], precio,existencias, "0", totalsinimpuesto, totalconimpuesto, 10000, impuestoenespanol, "0");
-                       
-                            actualizargridgeneral();
-                            calcularTotal();
-
+                            for (int u = 0; u < dataGridView1.Rows.Count; u++)
+                            {
+                                if (dataGridView1.Rows[u].Cells[0].Value.ToString()==textBox1.Text)
+                                {
+                                    control++;
+                                }
+                            }
                         }
                         else
                         {
-                            impuestoenespanol = "(E)";
-                            cantidad = Int32.Parse(textBox2.Text.Trim());
-                            precio = double.Parse(mysql.lector["Precio"].ToString());
-                            existencias = Int32.Parse(mysql.lector["OnHand"].ToString());
-                            dataGridView1.Rows.Add(mysql.lector["Barcode"], cantidad, mysql.lector["Descripcion"], precio,existencias, "0", totalsinimpuesto, totalconimpuesto, 10000, impuestoenespanol, "0");
-                       
-                            actualizargridgeneral();
-                            calcularTotal();
+                            control = 1;
                         }
+                        
+                        if (Int64.Parse(mysql.lector["OnHand"].ToString())>0&& Int64.Parse(mysql.lector["OnHand"].ToString()) >control)
+                        {
+                            if (mysql.lector["Impuesto"].ToString() == "Impuesto")
+                            {
+                                impuestoenespanol = "(G)";
+                                cantidad = Int32.Parse(textBox2.Text.Trim());
+                                precio = double.Parse(mysql.lector["Precio"].ToString());
+                                existencias = Int32.Parse(mysql.lector["OnHand"].ToString());
+                                dataGridView1.Rows.Add(mysql.lector["Barcode"], cantidad, mysql.lector["Descripcion"], precio, existencias, "0", totalsinimpuesto, totalconimpuesto, 10000, impuestoenespanol, "0");
+
+                                actualizargridgeneral();
+                                calcularTotal();
+
+                            }
+                            else
+                            {
+                                impuestoenespanol = "(E)";
+                                cantidad = Int32.Parse(textBox2.Text.Trim());
+                                precio = double.Parse(mysql.lector["Precio"].ToString());
+                                existencias = Int32.Parse(mysql.lector["OnHand"].ToString());
+                                dataGridView1.Rows.Add(mysql.lector["Barcode"], cantidad, mysql.lector["Descripcion"], precio, existencias, "0", totalsinimpuesto, totalconimpuesto, 10000, impuestoenespanol, "0");
+
+                                actualizargridgeneral();
+                                calcularTotal();
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Ya no hay suficiente inventario para vender este producto!","No hay inventario",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                        }
+
+                       
 
 
 
