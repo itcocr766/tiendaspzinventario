@@ -218,15 +218,17 @@ namespace POS.productosprincipal
                                         sheet.Range["B" + y].Text = "Descripción";
                                         sheet.Range["C" + y].Text = "Precio";
                                         sheet.Range["D" +y].Text = "Cantidad";
-                                        sheet.Range["E" + y].Text = "Cantidad Total";
-                                        sheet.Range["F" + y].Text = "Suma precio Total";
+                                        sheet.Range["E" + y].Text = "Ingreso";
+                                        sheet.Range["F" + y].Text = "Cantidad Total";
+                                        sheet.Range["G" + y].Text = "Suma precio Total";
                                         y++;
                                         sheet.Range["A" + y].Text = lee["Barcode"].ToString();
                                         sheet.Range["B" + y].Text = lee["Descripcion"].ToString();
                                         sheet.Range["C" + y].NumberValue = double.Parse(lee["Precio"].ToString());
                                         sheet.Range["D" + y].NumberValue = Int64.Parse(lee["OnHand"].ToString());
-                                        sheet.Range["E" + y].NumberValue = (double.Parse(lee["OnHand"].ToString()) + double.Parse(dataGridView1.Rows[x].Cells[4].Value.ToString()));
-                                        sheet.Range["F" + y].NumberValue = ((double.Parse(lee["Precio"].ToString()) * (double.Parse(lee["OnHand"].ToString()) + double.Parse(dataGridView1.Rows[x].Cells[4].Value.ToString()))));
+                                        sheet.Range["E" + y].NumberValue = Int64.Parse(dataGridView1.Rows[x].Cells[4].Value.ToString());
+                                        sheet.Range["F" + y].NumberValue = (double.Parse(lee["OnHand"].ToString()) + double.Parse(dataGridView1.Rows[x].Cells[4].Value.ToString()));
+                                        sheet.Range["G" + y].NumberValue = ((double.Parse(lee["Precio"].ToString()) * (double.Parse(lee["OnHand"].ToString()) + double.Parse(dataGridView1.Rows[x].Cells[4].Value.ToString()))));
                                         y++;
 
                                     }
@@ -247,8 +249,9 @@ namespace POS.productosprincipal
                                         sheet.Range["B" + y].Text = lee["Descripcion"].ToString();
                                         sheet.Range["C" + y].NumberValue = double.Parse(lee["Precio"].ToString());
                                         sheet.Range["D" + y].NumberValue = Int64.Parse(lee["OnHand"].ToString());
-                                        sheet.Range["E" + y].NumberValue = (double.Parse(lee["OnHand"].ToString()) + double.Parse(dataGridView1.Rows[x].Cells[4].Value.ToString()));
-                                        sheet.Range["F" + y].NumberValue = ((double.Parse(lee["Precio"].ToString()) * (double.Parse(lee["OnHand"].ToString()) + double.Parse(dataGridView1.Rows[x].Cells[4].Value.ToString()))));
+                                        sheet.Range["E" + y].NumberValue = Int64.Parse(dataGridView1.Rows[x].Cells[4].Value.ToString());
+                                        sheet.Range["F" + y].NumberValue = (double.Parse(lee["OnHand"].ToString()) + double.Parse(dataGridView1.Rows[x].Cells[4].Value.ToString()));
+                                        sheet.Range["G" + y].NumberValue = ((double.Parse(lee["Precio"].ToString()) * (double.Parse(lee["OnHand"].ToString()) + double.Parse(dataGridView1.Rows[x].Cells[4].Value.ToString()))));
                                         y++;
                                     }
                                   
@@ -274,15 +277,17 @@ namespace POS.productosprincipal
                                         sheet.Range["B" + y].Text = "Descripción";
                                         sheet.Range["C" + y].Text = "Precio";
                                         sheet.Range["D" + y].Text = "Cantidad";
-                                        sheet.Range["E" + y].Text = "Cantidad Total";
-                                        sheet.Range["F" + y].Text = "Suma precio Total";
+                                        sheet.Range["E" + y].Text = "Ingreso";
+                                        sheet.Range["F" + y].Text = "Cantidad Total";
+                                        sheet.Range["G" + y].Text = "Suma precio Total";
                                         y++;
                                         sheet.Range["A" + y].Text = dataGridView1.Rows[x].Cells[0].Value.ToString();
                                         sheet.Range["B" + y].Text = dataGridView1.Rows[x].Cells[1].Value.ToString();
                                         sheet.Range["C" + y].NumberValue = double.Parse(dataGridView1.Rows[x].Cells[3].Value.ToString());
-                                        sheet.Range["D" + y].NumberValue = Int64.Parse(dataGridView1.Rows[x].Cells[4].Value.ToString());
+                                        sheet.Range["D" + y].NumberValue = Int64.Parse(lee["OnHand"].ToString());
                                         sheet.Range["E" + y].NumberValue = Int64.Parse(dataGridView1.Rows[x].Cells[4].Value.ToString());
-                                        sheet.Range["F" + y].NumberValue = ((double.Parse(dataGridView1.Rows[x].Cells[3].Value.ToString()) * (double.Parse(dataGridView1.Rows[x].Cells[4].Value.ToString()))));
+                                        sheet.Range["F" + y].NumberValue = Int64.Parse(dataGridView1.Rows[x].Cells[4].Value.ToString());
+                                        sheet.Range["G" + y].NumberValue = ((double.Parse(dataGridView1.Rows[x].Cells[3].Value.ToString()) * (double.Parse(dataGridView1.Rows[x].Cells[4].Value.ToString()))));
                                         y++;
                                     }
                                     else
@@ -301,9 +306,10 @@ namespace POS.productosprincipal
                                         sheet.Range["A" + y].Text = dataGridView1.Rows[x].Cells[0].Value.ToString();
                                         sheet.Range["B" + y].Text = dataGridView1.Rows[x].Cells[1].Value.ToString();
                                         sheet.Range["C" + y].NumberValue = double.Parse(dataGridView1.Rows[x].Cells[3].Value.ToString());
-                                        sheet.Range["D" + y].NumberValue = Int64.Parse(dataGridView1.Rows[x].Cells[4].Value.ToString());
+                                        sheet.Range["D" + y].NumberValue = Int64.Parse(lee["OnHand"].ToString());
                                         sheet.Range["E" + y].NumberValue = Int64.Parse(dataGridView1.Rows[x].Cells[4].Value.ToString());
-                                        sheet.Range["F" + y].NumberValue = ((double.Parse(dataGridView1.Rows[x].Cells[3].Value.ToString()) * (double.Parse(dataGridView1.Rows[x].Cells[4].Value.ToString()))));
+                                        sheet.Range["F" + y].NumberValue = Int64.Parse(dataGridView1.Rows[x].Cells[4].Value.ToString());
+                                        sheet.Range["G" + y].NumberValue = ((double.Parse(dataGridView1.Rows[x].Cells[3].Value.ToString()) * (double.Parse(dataGridView1.Rows[x].Cells[4].Value.ToString()))));
                                         y++;
                                     }
 
