@@ -3272,21 +3272,49 @@ namespace POS
    
         private void comboBox3_KeyDown_1(object sender, KeyEventArgs e)
         {
+            bool band = false;
+            bool sacar = false;
             try
             {
                 if (e.KeyCode == Keys.Enter)
                 {
-                    textBox17.Text = "";
-                    if (comboBox3.Text=="0")
+                    using (var mysql = new Mysql())
                     {
-                        comboBox3.Text = "0";
-                        textBox17.Text = "Contado";
-                        textBox9.Text = "Contado";
-                        textBox10.Text = "Contado@correo.com";
-                        textBox1.Focus();
+                        mysql.conexion();
+                        mysql.cadenasql = "SELECT count(*),Cedula,Nombre,Telefono,Correo FROM `clientes` WHERE Cedula='" + comboBox3.Text.Trim() + "'";
+                        mysql.comando = new MySqlCommand(mysql.cadenasql, mysql.con);
+                        using (MySqlDataReader dr = mysql.comando.ExecuteReader())
+                        {
+
+                            if (dr.Read())
+                            {
+                                if (Int64.Parse(dr["count(*)"].ToString()) > 0)
+                                {
+                                    comboBox3.Text = dr["Cedula"].ToString();
+                                    textBox17.Text = dr["Nombre"].ToString();
+                                    textBox9.Text = dr["Telefono"].ToString();
+                                    textBox10.Text = dr["Correo"].ToString();
+
+                                    band = true;
+                                    textBox1.Focus();
+                                }
+                                else
+                                {
+                                    sacar = true;
+                                }
+
+                            }
+                        }
+
+                    }
+                    if (band)
+                    {
+
                     }
                     else
                     {
+
+
                         rClient.endPoint = "https://apis.gometa.org/cedulas/" + comboBox3.Text.Trim();
                         debugOutput("RESTClient Object created.");
 
@@ -3298,58 +3326,61 @@ namespace POS
 
                         if (!string.IsNullOrEmpty(textBox17.Text))
                         {
-                            using (var mysql=new Mysql())
+                            using (var mysql = new Mysql())
                             {
                                 mysql.conexion();
-                                mysql.cadenasql = "SELECT * FROM `clientes` WHERE Cedula='"+comboBox3.Text.Trim()+"'";
-                                mysql.comando =new MySqlCommand(mysql.cadenasql,mysql.con);
+                                mysql.cadenasql = "SELECT * FROM `clientes` WHERE Cedula='" + comboBox3.Text.Trim() + "'";
+                                mysql.comando = new MySqlCommand(mysql.cadenasql, mysql.con);
                                 mysql.lector = mysql.comando.ExecuteReader();
                                 if (mysql.lector.Read())
                                 {
                                     textBox9.Text = mysql.lector["Telefono"].ToString();
                                     textBox10.Text = mysql.lector["Correo"].ToString();
+                                    comboBox3.Enabled = false;
                                     textBox1.Focus();
                                 }
                                 else
                                 {
-                                   DialogResult result= MessageBox.Show("Este cliente no existe, desea crearlo?",
-                                       "",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
-                                    if (result == DialogResult.Yes)
-                                    {
-                                        cedula = comboBox3.Text;
-                                        nombrec = textBox17.Text.Trim();
-                                        clienform cfm = new clienform(this);
-                                        cfm.textBox5.Text = cedula;
-                                        cfm.textBox1.Text = nombrec;
-                                        this.Visible = false;
-                                        cfm.bandera = true;
-                                        cfm.Show(this);
-                                        //this.Visible = true;
-                                        //this.SendToBack();
-                                        cfm.Focus();
-                                        cfm.textBox2.Focus();
-                                        //SendKeys.Send("{%}{Tab}");
-                                        //NativeMethods.SetWindowTop(cfm.Handle);
+                                    sacar = true;
 
-                                    }
-                                   
-                                  
+
 
                                 }
 
                                 mysql.Dispose();
-                               
-                            }
 
+                            }
                         }
+
 
                     }
 
-                  
+                    if (sacar)
+                    {
+                        DialogResult result = MessageBox.Show("Este cliente no existe, desea crearlo?",
+                                     "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (result == DialogResult.Yes)
+                        {
+                            cedula = comboBox3.Text;
+                            nombrec = textBox17.Text.Trim();
+                            clienform cfm = new clienform(this);
+                            cfm.textBox5.Text = cedula;
+                            cfm.textBox1.Text = nombrec;
+                            this.Visible = false;
+                            cfm.bandera = true;
+                            cfm.Show(this);
+
+                            cfm.Focus();
+                            cfm.textBox2.Focus();
+
+
+                        }
+                    }
+
                 }
 
 
-               
+
 
             }
 

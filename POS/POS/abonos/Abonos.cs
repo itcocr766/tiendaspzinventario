@@ -587,11 +587,22 @@ namespace POS.abonos
 
         private void comboBox2_KeyDown(object sender, KeyEventArgs e)
         {
+            DataTable df = new DataTable();
             try
             {
                 if (comboBox2.Text != "" && e.KeyCode == Keys.Enter)
                 {
-                 
+                    dataGridView2.DataSource = null;
+                    using (var mysql = new Mysql())
+                    {
+                        mysql.conexion();
+                        mysql.cadenasql = "select Item,Descripcion from items,detalles where detalles.NumeroFactura='" + comboBox2.Text + "' and detalles.Item=items.Barcode";
+                        MySqlDataAdapter adapt = new MySqlDataAdapter(mysql.cadenasql, mysql.con);
+                        adapt.Fill(df);
+                        dataGridView2.DataSource = df;
+                        mysql.Dispose();
+
+                    }
                     label2.Visible = true;
                     textBox1.Visible = true;
                     label5.Visible = true;
@@ -607,11 +618,11 @@ namespace POS.abonos
             catch (Exception eftyu)
             {
                 Mensaje.Error(eftyu, "537");
-              
+
 
             }
 
-           
+
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -937,6 +948,16 @@ namespace POS.abonos
         private void comboBox1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void dataGridView3_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (dataGridView2.Rows.Count > 0 && dataGridView3.Rows.Count > 0)
+            {
+                comboBox1.Text = dataGridView2.Rows[0].Cells[0].Value.ToString();
+                comboBox1.Focus();
+                SendKeys.Send("{ENTER}");
+            }
         }
     }
 }

@@ -406,6 +406,7 @@
             this.dataGridView3.Size = new System.Drawing.Size(313, 125);
             this.dataGridView3.TabIndex = 39;
             this.dataGridView3.Click += new System.EventHandler(this.dataGridView3_Click);
+            this.dataGridView3.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dataGridView3_MouseDoubleClick);
             // 
             // dataGridView2
             // 
