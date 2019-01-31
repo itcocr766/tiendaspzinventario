@@ -2281,7 +2281,7 @@ namespace POS
                 "\nVUELTO=                           ₡"
                 + string.Format("{0:n0}", double.Parse(textBox15.Text.Trim())) +
                 "\n           ARTICULOS CON I.V.I." +
-                "\n           VENDEDOR : " + textBox16.Text.Trim() +" F"+
+                "\nVENDEDOR : " + textBox16.Text.Trim() +" F"+
                 "\n----Autorizada mediante resolución--------\n---------N° DGT‐R‐48‐2016 del 07---------\n----------de octubre de 2016.---------------\n----------¡Gracias por su compra!--------------\n********Esperamos servirle de nuevo ************";
 
 
@@ -2330,7 +2330,7 @@ namespace POS
             "\nVUELTO=                           ₡"
             + string.Format("{0:n0}", double.Parse(textBox15.Text.Trim())) +
            "\n           ARTICULOS CON I.V.I." +
-           "\n           VENDEDOR : " + textBox16.Text.Trim() +" P"+
+           "\nVENDEDOR : " + textBox16.Text.Trim() +" P"+
            "\n----Autorizada mediante resolución--------\n---------N° DGT‐R‐48‐2016 del 07---------\n----------de octubre de 2016.---------------\n----------¡Gracias por su compra!--------------\n********Esperamos servirle de nuevo ************";
 
 
@@ -2364,7 +2364,7 @@ namespace POS
             "\nVUELTO=                           ₡"
             + string.Format("{0:n0}", double.Parse(textBox15.Text.Trim())) +
            "\n           ARTICULOS CON I.V.I." +
-           "\n           VENDEDOR : " + textBox16.Text.Trim() +" P"+
+           "\nVENDEDOR : " + textBox16.Text.Trim() +" P"+
            "\n----Autorizada mediante resolución--------\n---------N° DGT‐R‐48‐2016 del 07---------\n----------de octubre de 2016.---------------\n----------¡Gracias por su compra!--------------\n********Esperamos servirle de nuevo ************";
 
 
@@ -4068,7 +4068,7 @@ namespace POS
               "\nVUELTO=                           ₡"
               + textBox15.Text.Trim() +
               "\n           ARTICULOS CON I.V.I." +
-              "\n           VENDEDOR : " + textBox16.Text.Trim() +" F"+
+              "\nVENDEDOR : " + textBox16.Text.Trim() +" F"+
               "\n----Autorizada mediante resolución--------\n---------N° DGT‐R‐48‐2016 del 07---------\n----------de octubre de 2016.---------------\n----------¡Gracias por su compra!--------------\n********Esperamos servirle de nuevo ************";
 
 
@@ -4105,7 +4105,7 @@ namespace POS
               "\nVUELTO=                           ₡"
               + textBox15.Text.Trim() +
               "\n           ARTICULOS CON I.V.I." +
-              "\n           VENDEDOR : " + textBox16.Text.Trim() +" F"+
+              "\nVENDEDOR : " + textBox16.Text.Trim() +" F"+
               "\n----Autorizada mediante resolución--------\n---------N° DGT‐R‐48‐2016 del 07---------\n----------de octubre de 2016.---------------\n----------¡Gracias por su compra!--------------\n********Esperamos servirle de nuevo ************";
 
 
